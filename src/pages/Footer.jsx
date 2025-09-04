@@ -1,10 +1,11 @@
 import React from "react";
 
 
+
 export default function Footer() {
   return (
-    <footer>
-          <p>&copy; 2025 #VANLIFE</p>
+    <footer className="footer footer-container container">
+      <p><span>&copy; 2025</span><span>#VANLIFE</span></p>
     </footer>
   );
 }

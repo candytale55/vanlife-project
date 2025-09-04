@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 export default function Header() {
   return (
-    <header>
+    <header className="header header-container container">
       <Link to="/">#VANLIFE</Link>
       <nav>
         <Link to="/about">About</Link>
