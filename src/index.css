@@ -19,8 +19,9 @@ body {
   scrollbar-width: none;
 }
 
-.container {
-  max-width: 600px;
+.container { /*TODO - Correct*/
+  max-width: 800px;
+  margin: 0 auto;
 }
 
 header {
@@ -117,6 +118,7 @@ header a:hover {
 /*** ABOUT PAGE ***/
 .about-hero-image {
   max-width: 100%;
+  
 }
 
 .about-page-content {
@@ -140,6 +142,7 @@ header a:hover {
   padding-bottom: 32px;
   margin-inline: 27px;
   border-radius: 5px;
+  margin-bottom: 64px; /*TODO - Correct*/
 }
 
 .about-page-cta h2 {
