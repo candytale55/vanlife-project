@@ -53,6 +53,13 @@ From Scrimba courses and tutorials in [The Frontend Career Path](https://scrimba
 
 https://miragejs.com/ - Set a mockup server that intercepts API calls - TO get the Van's info.
 
+Installed mirage following instructions in: https://miragejs.com/docs/getting-started/installation/ 
+
+```bash
+npm install --save-dev miragejs
+```
+
+
 Figma file: https://www.figma.com/design/igDA2NiMDhoaIIAqm5EnTq/-VanLife?node-id=0-1&p=f&t=MjesjYzrUfOqT5KE-0
 
 
@@ -124,4 +131,3 @@ Figma file: https://www.figma.com/design/igDA2NiMDhoaIIAqm5EnTq/-VanLife?node-id
  */
 
 
- 
