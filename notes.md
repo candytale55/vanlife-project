@@ -66,6 +66,7 @@ Layout Routes: https://reactrouter.com/6.28.0/start/concepts#layout-routes
 
 ROute Index: https://reactrouter.com/6.28.0/start/concepts#index-routes 
 
+useOutletContext: https://reactrouter.com/api/hooks/useOutletContext 
 
 
 
@@ -316,3 +317,15 @@ NAVLINK
  * /host/vans/:id/details, so you'll need to employ a
  * trick we recently learned for that to work.
  */
+
+
+ /**
+ * Challenge: check out the docs linked in the slide, and see if you
+ * can implement the Outlet Context feature it talks about.
+ * 
+ * Part of this challenge will require you to (finally) build out those
+ * nested components. Again, if you don't need CSS practice, you can
+ * skip the styling part, and I'll handle that for you.
+ */
+
+
