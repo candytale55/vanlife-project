@@ -211,3 +211,108 @@ ROute Index: https://reactrouter.com/6.28.0/start/concepts#index-routes
  * as well!
  * 
  */
+
+
+
+NAVLINK
+
+     /**
+     * Challenge - part 1:
+     * Make the main navbar indicate the currently-active route. (You can
+     * leave the home link alone, since it's doubling as our logo. Only
+     * make changes to the /host, /about, and /vans links)
+     * 
+     * Use the following CSS rules:
+     *      font-weight: bold;
+     *      text-decoration: underline;
+     *      color: #161616;
+     * 
+     * You can use either inline styles or a className.
+     */
+
+     /**
+ * Challenge - part 2:
+ * Make the host navbar indicate the currently-active route.
+ * 
+ * Use the following CSS rules:
+ *      font-weight: bold;
+ *      text-decoration: underline;
+ *      color: #161616;
+ * 
+ * I'd recommend using an inline style this time.
+ * 
+ * NOTE: There will be a small bug that we'll fix 
+ * after you do the challenge.
+ */
+
+
+  /**
+   * Challenge: add the /host/vans and /host/vans/:id routes, as well
+   * as the "Vans" link in the Host navbar.
+   * 
+   * For now, just create the stubbed-out version of the pages (i.e.
+   * components that just render an <h1>). Don't worry about adding
+   * navigation from /host/vans to /host/vans/:id yet - the link to
+   * /host/vans is enough for now.
+   * 
+   * When deciding whether or not to use nested routes, keep in mind
+   * what will/won't be shared between these two pages. See the Figma
+   * design file (or the screenshots) to help guide your choice.
+   */
+
+   Optional Challenge
+
+
+    /**
+     * Challenge (not optional!): build the shared UI portion of the
+     * Host Van Detail page. This is
+     * 
+     * Optional portion: also style it to look like the design.
+     * 
+     * For now, get the data from a request to `/api/host/vans/:id`
+     * and display the van image, name, price, type
+     */
+
+      /**
+     * Mini challenge: Try to make it so the "Back to all vans"
+     * Link takes people BACK one route.
+     * 
+     * MAJOR HINT: we just talked about how `cd .` and `cd ..`
+     * work in a terminal, and mentioned how `.` represents
+     * the current route
+     * 
+     * MAJOR CAVEAT: it's not going to do what you think it'll
+     * do, but we'll learn why and see an easy fix 🤭
+     */
+
+
+     /**
+   * Challenge: Add the routes necessary so we can access
+   * /host/vans/:id/pricing and /host/vans/:id/photos.
+   * 
+   * Add stubbed-out components in separate files for
+   * these routes (e.g. <h2>Pricing view here</h2>). I already
+   * made the `HostVanInfo.jsx`, `HostVanPricing.jsx` and
+   * `HostVanPhotos.jsx` files for you, but they're empty.
+   * 
+   * Don't forget: you'll need to use a special tool from
+   * React Router so we can keep the top info (and 
+   * eventually the navbar we build) on the page while going
+   * from nested route to nested route. This will require some
+   * slight changes to HostVanDetail.jsx
+   * 
+   * Since we don't have the navbar yet, you can test them
+   * by manually navigating to e.g. /host/vans/1/pricing.
+   */
+
+   /**
+ * Challenge: Add the links for the navbar! Check the 
+ * Figma design slide to see what the text is.
+ * 
+ * Make it so the link style changes to more clearly
+ * indicate which route we're currently on.
+ * 
+ * Remember, "Details" leads to /host/vans/:id, not
+ * /host/vans/:id/details, so you'll need to employ a
+ * trick we recently learned for that to work.
+ */
