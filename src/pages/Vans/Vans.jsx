@@ -1,10 +1,17 @@
 import React from "react"
-import { Link } from "react-router-dom"
+import { Link, useSearchParams } from "react-router-dom"
 
 // ===== VANS LISTING COMPONENT =====
 export default function Vans() {
     // ===== STATE MANAGEMENT =====
     const [vans, setVans] = React.useState([])
+
+    // Search params for filtering Vans by type
+    const [searchParams, setSearchParams] = useSearchParams()
+    const [vans, setVans] = React.useState([])
+
+    const typeFilter = searchParams.get("type")
+    console.log(typeFilter)
 
     // Fetch vans data on component mount
     React.useEffect(() => {

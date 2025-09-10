@@ -68,6 +68,8 @@ ROute Index: https://reactrouter.com/6.28.0/start/concepts#index-routes
 
 useOutletContext: https://reactrouter.com/api/hooks/useOutletContext 
 
+useSearchParams https://reactrouter.com/api/hooks/useSearchParams
+https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams
 
 
 /**
@@ -329,3 +331,21 @@ NAVLINK
  */
 
 
+Vans
+    /**
+     * Challenge: access the search params in this component
+     * 1. Using the hook from react-router-dom, set a variable
+     *    called `searchParams`
+     * 2. Save the value of the `type` parameter (from the
+     *    `searchParams` object) to a variable called `typeFilter`
+     * 3. Log the value of the `typeFilter` to the console
+     */
+
+VansDetails
+/**
+ * Challenge: check out the docs linked in the slide, and see if you
+ * can implement the Outlet Context feature it talks about.
+ * Just make one Outlet component with two contexts
+ */       
+
+ 
