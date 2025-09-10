@@ -7,9 +7,7 @@ export default function Vans() {
     const [vans, setVans] = React.useState([])
 
     // Search params for filtering Vans by type
-    const [searchParams, setSearchParams] = useSearchParams()
-    const [vans, setVans] = React.useState([])
-
+    let [searchParams, setSearchParams] = useSearchParams()
     const typeFilter = searchParams.get("type")
     console.log(typeFilter)
 

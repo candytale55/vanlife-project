@@ -340,7 +340,7 @@ Vans
      *    `searchParams` object) to a variable called `typeFilter`
      * 3. Log the value of the `typeFilter` to the console
      */
-
+https://reactrouter.com/api/hooks/useSearchParams 
 VansDetails
 /**
  * Challenge: check out the docs linked in the slide, and see if you
@@ -348,4 +348,3 @@ VansDetails
  * Just make one Outlet component with two contexts
  */       
 
- 
