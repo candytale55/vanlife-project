@@ -8,6 +8,7 @@ export default function Vans() {
 
         // Search params for filtering Vans by type
         const [searchParams, setSearchParams] = useSearchParams()
+        
         // State to hold fetched vans data
         const [vans, setVans] = React.useState([])
 
@@ -24,18 +25,31 @@ export default function Vans() {
             : vans
         
     // ===== RENDER VAN TILES =====
-        const vanElements = displayedVans.map(van => (
-            <div key={van.id} className="van-tile">
-                <Link to={`/vans/${van.id}`}>
-                    <img src={van.imageUrl} />
-                    <div className="van-info">
-                        <h3>{van.name}</h3>
-                        <p>${van.price}<span>/day</span></p>
-                    </div>
-                    <i className={`van-type ${van.type} selected`}>{van.type}</i>
-                </Link>
-            </div>
-        ))
+    const vanElements = displayedVans.map(van => (
+        <div key={van.id} className="van-tile">
+            <Link to={`/vans/${van.id}`}>
+                <img src={van.imageUrl} />
+                <div className="van-info">
+                    <h3>{van.name}</h3>
+                    <p>${van.price}<span>/day</span></p>
+                </div>
+                <i className={`van-type ${van.type} selected`}>{van.type}</i>
+            </Link>
+        </div>
+    ))
+    
+    
+// ===== HANDLE FILTER BUTTONS =====
+    function handleFilterChange(key, value) {
+        setSearchParams(prevParams => {
+            if (value === null) {
+                prevParams.delete(key)
+            } else {
+                prevParams.set(key, value)
+            }
+            return prevParams
+        })
+    }
 
     // ===== RENDER COMPONENT =====
 

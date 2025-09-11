@@ -534,3 +534,27 @@ function genNewSearchParamString(key, value) {
      *    Hint: `...${typeFilter === "simple" ? ...}`
      */
 
+
+         /**
+     * Mini-challenge: change the absolute path in the Link below
+     * to a relative path. There's also one still in the HostVans.jsx
+     * file that you should change, too.
+
+         const vanElements = displayedVans.map(van => (
+        <div key={van.id} className="van-tile">
+            <Link to={`/vans/${van.id}`}>
+                <img src={van.imageUrl} />
+                <div className="van-info">
+                    <h3>{van.name}</h3>
+                    <p>${van.price}<span>/day</span></p>
+                </div>
+                <i className={`van-type ${van.type} selected`}>{van.type}</i>
+            </Link>
+        </div>
+    ))
+    
+     */
+
+
+
+
