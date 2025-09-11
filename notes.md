@@ -71,6 +71,9 @@ useOutletContext: https://reactrouter.com/api/hooks/useOutletContext
 useSearchParams https://reactrouter.com/api/hooks/useSearchParams
 https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams
 
+First we added the links to Vans using useSearchParams, then we used the setter function with URLSearchParams
+URLSearchParams: https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams
+
 
 /**
  * Challenge: set up the BrowserRouter and Routes!
@@ -348,3 +351,38 @@ VansDetails
  * Just make one Outlet component with two contexts
  */       
 
+    /**
+     * Challenge: filter the list of vans based on the `typeFilter`
+     * we created earlier. For now, just enter "simple", "luxury",
+     * or "rugged" into the search param in the URL to check your work.
+     */
+
+
+    /**
+     * Challenge: add links to filter the vans by type. Use a hard-coded
+     * `to` string like we just practiced. The types are "simple", 
+     * "luxury", and "rugged".
+     * 
+     * For now, give the Links a className of `van-type simple` (and
+     * manually replace "simple" with "luxury" and "rugged" for 
+     * the Links that filter by those types.)
+     * 
+     * Include a Link to clear the filters. Its className should be
+     * `van-type clear-filters`
+     */
+
+    /**
+     * Challenge: change the Links to buttons and use the
+     * setSearchParams function to set the search params
+     * when the buttons are clicked. Keep all the classNames
+     * the same.
+     */
+     
+     Ref: https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams
+
+     Example Jedi: 
+        <button onClick={() => setSearchParams({type: "jedi"})}>Jedi</button>
+        <button onClick={() => setSearchParams({type: "sith"})}>Sith</button>
+        <button onClick={() => setSearchParams({})}>Clear</button>
+
+      

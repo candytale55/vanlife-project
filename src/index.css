@@ -7,7 +7,6 @@
 }
 */
 
-/* ===== GLOBAL STYLES ===== */
 * {
   box-sizing: border-box;
 }
@@ -20,7 +19,11 @@ body {
   font-family: "Inter", sans-serif;
 }
 
-/* Hide scrollbars */
+a {
+  text-decoration: unset;
+  color: unset;
+}
+
 body::-webkit-scrollbar {
   display: none;
 }
@@ -30,14 +33,12 @@ body {
   scrollbar-width: none;
 }
 
-/* ===== SITE LAYOUT ===== */
 .site-wrapper {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
 }
 
-/* Header navigation */
 header {
   height: 110px;
   display: flex;
@@ -65,12 +66,10 @@ header a:hover {
   text-decoration: underline;
 }
 
-/* Main content area */
 main {
   margin-bottom: 84px;
 }
 
-/* Footer */
 footer {
   background-color: #161616;
   color: #AAAAAA;
@@ -83,8 +82,6 @@ footer {
   font-weight: 500;
 }
 
-/* ===== SHARED COMPONENTS ===== */
-/* Button styles */
 .link-button {
   display: inline-block;
   text-align: center;
@@ -114,7 +111,7 @@ footer {
   transform: translate(1px, 1px);
 }
 
-/* ===== HOME PAGE ===== */
+/*** HOME PAGE ***/
 .home-container {
   background: linear-gradient(0deg, rgba(0, 0, 0, 0.46), rgba(0, 0, 0, 0.46)), url("./assets/images/home-hero.png") no-repeat center center;
   -webkit-background-size: cover;
@@ -156,7 +153,8 @@ footer {
   transform: translate(1px, 1px);
 }
 
-/* ===== ABOUT PAGE ===== */
+
+/*** ABOUT PAGE ***/
 .about-hero-image {
   max-width: 100%;
 }
@@ -175,7 +173,6 @@ footer {
   line-height: 22px;
 }
 
-/* About CTA section */
 .about-page-cta {
   background-color: #FFCC8D;
   color: #161616;
@@ -196,12 +193,21 @@ footer {
   border-radius: 10px;
 }
 
-/* ===== VAN LISTING PAGES ===== */
+
+/*** VAN PAGES ***/
 .van-list-container {
   padding-inline: 23px
 }
 
-/* Van grid layout */
+.van-list-filter-buttons {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.van-list-filter-buttons>a {
+  margin-right: 15px;
+}
+
 .van-list {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -220,7 +226,6 @@ footer {
   border-radius: 5px;
 }
 
-/* Filter buttons */
 .van-list-container button {
   margin-right: 20px;
   cursor: pointer;
@@ -250,7 +255,6 @@ footer {
   color: #FFEAD0;
 }
 
-/* Van type specific colors */
 .van-type.simple:hover,
 .van-type.simple.selected {
   background-color: #E17654;
@@ -283,7 +287,6 @@ i[class*='van-type-'] {
   padding: 7px 14px;
 }
 
-/* ===== VAN DETAIL PAGE ===== */
 .van-detail-container {
   padding: 27px;
 }
@@ -335,8 +338,6 @@ i[class*='van-type-'] {
   font-size: 1.125rem;
 }
 
-/* ===== HOST DASHBOARD SECTION ===== */
-/* Host navigation */
 .host-nav {
   display: flex;
 }
@@ -354,7 +355,6 @@ i[class*='van-type-'] {
   font-weight: 600;
 }
 
-/* Host van listings */
 .host-van-link-wrapper {
   color: unset;
   text-decoration: unset;
@@ -393,7 +393,6 @@ i[class*='van-type-'] {
   margin-block: 10px;
 }
 
-/* ===== HOST VAN DETAIL PAGES ===== */
 .host-van-detail-layout-container {
   background-color: white;
   padding: 24px;
@@ -423,7 +422,6 @@ i[class*='van-type-'] {
   margin-block: 0;
 }
 
-/* Host van detail navigation */
 .host-van-detail-nav {
   display: flex;
   margin-block: 25px;
@@ -450,7 +448,6 @@ i[class*='van-type-'] {
   font-weight: 700;
 }
 
-/* Host van detail info sections */
 .host-van-detail-info>h4 {
   font-weight: 700;
   font-size: 14px;
