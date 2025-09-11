@@ -436,3 +436,101 @@ VansDetails
         </div>
     )
      ```
+
+
+### Link + function 
+
+> To include more search parameters and not just hardcoded type ones (Vanilla JS).
+
+Jedi Example code 
+
+```jsx
+  function genNewSearchParamString(key, value) {
+    const sp = new URLSearchParams(searchParams)
+    if (value === null) {
+      sp.delete(key)
+    } else {
+      sp.set(key, value)
+    }
+    return `?${sp.toString()}`
+  }
+
+  return (
+    <main>
+      <h2>Home</h2>
+      <div>
+        <Link to={genNewSearchParamString("type", "jedi")}>Jedi</Link>
+        <Link to={genNewSearchParamString("type", "sith")}>Sith</Link>
+        <Link to={genNewSearchParamString("type", null)}>Clear</Link>
+      </div>
+      <div>
+        <button onClick={() => setSearchParams({ type: "jedi" })}>Jedi</button>
+        <button onClick={() => setSearchParams({ type: "sith" })}>Sith</button>
+        <button onClick={() => setSearchParams({})}>Clear</button>
+      </div>
+      <hr />
+      {charEls}
+    </main>
+  );
+}
+
+```
+Further Down the Rabbit Hole (JEDI)
+I'm adding it for reference for next challenge:
+
+```jsx
+function genNewSearchParamString(key, value) {
+    const sp = new URLSearchParams(searchParams)
+    if (value === null) {
+      sp.delete(key)
+    } else {
+      sp.set(key, value)
+    }
+    return `?${sp.toString()}`
+  }
+  
+  function handleFilterChange(key, value) {
+    setSearchParams(prevParams => {
+      if (value === null) {
+        prevParams.delete(key)
+      } else {
+        prevParams.set(key, value)
+      }
+      return prevParams
+    })
+  }
+
+  return (
+    <main>
+      <h2>Home</h2>
+      <div>
+        <Link to={genNewSearchParamString("type", "jedi")}>Jedi</Link>
+        <Link to={genNewSearchParamString("type", "sith")}>Sith</Link>
+        <Link to={genNewSearchParamString("type", null)}>Clear</Link>
+      </div>
+      <div>
+        <button onClick={() => handleFilterChange("type", "jedi")}>Jedi</button>
+        <button onClick={() => handleFilterChange("type", "sith")}>Sith</button>
+        <button onClick={() => handleFilterChange("type", null)}>Clear</button>
+      </div>
+      <hr />
+      {charEls}
+    </main>
+  );
+}
+```
+
+    /**
+     * Challenges:
+     * 1. Conditionally render the "Clear filter" button only if
+     *    there's a `type` filter currently applied in the search params
+     * 
+     * 2. On just the 3 filter buttons (not the Clear filter button),
+     *    conditionally render the className "selected" if the
+     *    typeFilter value equals the value that button sets it to.
+     *    (We don't have a variable for that, so it'll be a hard-coded
+     *    string).
+     * 
+     *    Hint: `...${typeFilter === "simple" ? ...}`
+     */
+
