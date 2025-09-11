@@ -371,13 +371,8 @@ VansDetails
      * `van-type clear-filters`
      */
 
-    /**
-     * Challenge: change the Links to buttons and use the
-     * setSearchParams function to set the search params
-     * when the buttons are clicked. Keep all the classNames
-     * the same.
-     */
-     
+  
+
      Ref: https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams
 
      Example Jedi: 
@@ -385,4 +380,59 @@ VansDetails
         <button onClick={() => setSearchParams({type: "sith"})}>Sith</button>
         <button onClick={() => setSearchParams({})}>Clear</button>
 
-      
+        /**
+     * Challenge: change the Links to buttons and use the
+     * setSearchParams function to set the search params
+     * when the buttons are clicked. Keep all the classNames
+     * the same.
+     * 
+     * Copy of Links: 
+               <Link 
+                    to="?type=simple"
+                    className="van-type simple"
+                >Simple</Link>
+                <Link 
+                    to="?type=luxury"
+                    className="van-type luxury"
+                >Luxury</Link>
+                <Link 
+                    to="?type=rugged"
+                    className="van-type rugged"
+                >Rugged</Link>
+                <Link 
+                    to="."
+                    className="van-type clear-filters"
+                >Clear filter</Link>
+     * 
+     */
+
+     Now: 
+
+     ```jsx
+      return (
+        <div className="van-list-container">
+            <h1>Explore our van options</h1>
+            <div className="van-list-filter-buttons">
+                <button 
+                    onClick={() => setSearchParams({ type: "simple" }) }
+                    className = "van-type simple"
+                    >Simple</button>
+                <button 
+                    onClick={() => setSearchParams({ type: "luxury" }) }
+                    className = "van-type luxury"
+                    >Luxury</button>
+                <button 
+                    onClick={() => setSearchParams({ type: "rugged" }) }
+                    className = "van-type rugged"
+                    >Rugged</button>
+                <button 
+                    onClick={() => setSearchParams({ }) }
+                    className = "van-type clear-filters"
+                    >Clear</button>
+            </div>
+            <div className="van-list">
+                {vanElements}
+            </div>
+        </div>
+    )
+     ```
