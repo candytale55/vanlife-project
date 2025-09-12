@@ -75,6 +75,11 @@ First we added the links to Vans using useSearchParams, then we used the setter 
 URLSearchParams: https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams
 
 React Router useLocation https://reactrouter.com/api/hooks/useLocation
+UseLocation: 
+  https://reactrouter.com/api/hooks/useLocation
+  https://api.reactrouter.com/v7/functions/react_router.useLocation.html 
+
+  
 
 ## Challenges
 
@@ -573,6 +578,8 @@ React Router useLocation https://reactrouter.com/api/hooks/useLocation
      */
 
 
+VAN DETAIL
+
 HISTORY STATE
 
 ```jsx
@@ -597,3 +604,24 @@ const displayedVans = typeFilter
   `<Link to={van.id} state={{ search: searchParams.toString() }}>` passes the stringified query to the next route
 
   `console.log(searchParams.toString())` to test it 
+
+
+UseLocation: 
+  https://reactrouter.com/api/hooks/useLocation
+  https://api.reactrouter.com/v7/functions/react_router.useLocation.html 
+
+console.log: 
+{pathname: '/vans/5', search: '', hash: '', state: {search: 'type=luxury'}, key: 'emy8w7js'}
+
+search would have a query string if there was one. like `search: '?name=bob'` 
+state: {search: 'type=luxury'}, == Object that has a search property.
+
+/**
+     * Challenge: modify the Link `to` prop below to send the user
+     * back to the previous page with the searchParams included, if
+     * they exist. (Remember we may not have anything in that state
+     * if there were no filters applied before coming to this
+     * van detail page, so make sure to "code defensively" to handle
+     * that case.)
+     */
+

@@ -1,11 +1,12 @@
 // ===== IMPORTS =====
 import React from "react"
-import { useParams } from "react-router-dom"
+import { Link, useParams, useLocation } from "react-router-dom"
 
 // ===== VAN DETAIL COMPONENT =====
 export default function VanDetail() {
     // ===== ROUTE PARAMS & STATE =====
     const params = useParams()
+    const location = useLocation()    
     const [van, setVan] = React.useState(null)
 
     // Fetch individual van data based on ID from URL
@@ -15,25 +16,26 @@ export default function VanDetail() {
             .then(data => setVan(data.vans))
     }, [params.id])
 
+    const search = location.state?.search || ""
+
     // ===== RENDER COMPONENT =====
     return (
         <div className="van-detail-container">
+            <Link
+                to={`..${search}`}
+                relative="path"
+                className="back-button"
+            >&larr; <span>Back to all vans</span></Link>
+
             {van ? (
                 <div className="van-detail">
-                    {/* Van image */}
                     <img src={van.imageUrl} />
-
-                    {/* Van type badge */}
                     <i className={`van-type ${van.type} selected`}>
                         {van.type}
                     </i>
-
-                    {/* Van details */}
                     <h2>{van.name}</h2>
                     <p className="van-price"><span>${van.price}</span>/day</p>
                     <p>{van.description}</p>
-
-                    {/* Rent CTA */}
                     <button className="link-button">Rent this van</button>
                 </div>
             ) : <h2>Loading...</h2>}
