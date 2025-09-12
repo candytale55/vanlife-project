@@ -74,6 +74,9 @@ https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams
 First we added the links to Vans using useSearchParams, then we used the setter function with URLSearchParams
 URLSearchParams: https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams
 
+React Router useLocation https://reactrouter.com/api/hooks/useLocation
+
+## Challenges
 
 /**
  * Challenge: set up the BrowserRouter and Routes!
@@ -552,9 +555,45 @@ function genNewSearchParamString(key, value) {
             </Link>
         </div>
     ))
-    
+
      */
 
 
+## Link State
+
+React Router useLocation https://reactrouter.com/api/hooks/useLocation
+
+  /**
+     * Challenge: modify the Link `to` prop below to send the user
+     * back to the previous page with the searchParams included, if
+     * they exist. (Remember we may not have anything in that state
+     * if there were no filters applied before coming to this
+     * van detail page, so make sure to "code defensively" to handle
+     * that case.)
+     */
 
 
+HISTORY STATE
+
+```jsx
+const displayedVans = typeFilter
+        ? vans.filter(van => van.type === typeFilter)
+        : vans
+
+    const vanElements = displayedVans.map(van => (
+        <div key={van.id} className="van-tile">
+            <Link to={van.id} state={{ search: searchParams.toString() }}>
+                <img src={van.imageUrl} />
+                <div className="van-info">
+                    <h3>{van.name}</h3>
+                    <p>${van.price}<span>/day</span></p>
+                </div>
+                <i className={`van-type ${van.type} selected`}>{van.type}</i>
+            </Link>
+        </div>
+    ))
+```
+
+  `<Link to={van.id} state={{ search: searchParams.toString() }}>` passes the stringified query to the next route
+
+  `console.log(searchParams.toString())` to test it 
