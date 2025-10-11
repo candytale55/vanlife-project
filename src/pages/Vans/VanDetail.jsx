@@ -16,16 +16,15 @@ export default function VanDetail() {
             .then(data => setVan(data.vans))
     }, [params.id])
 
-    const search = location.state?.search || "";
+    const search = location.state?.search || ""
 
-    // ===== RENDER COMPONENT =====
     return (
         <div className="van-detail-container">
             <Link
                 to={`..${search}`}
                 relative="path"
                 className="back-button"
-            >&larr; <span>Back to all vans</span></Link>
+            >&larr; <span>Back to {location.state ? `${location.state.type} vans` : "all vans"}</span></Link>
 
             {van ? (
                 <div className="van-detail">

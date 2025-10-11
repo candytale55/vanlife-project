@@ -934,3 +934,14 @@ const { data: van, error } = useVan(id);
 
 If you’d like, I can **rewrite your component in a “senior-level” idiomatic React 18 style** (with hooks, error handling, and clean JSX) so you can compare side-by-side.
 Would you like me to do that next?
+
+
+VanDetail
+    /**
+     * Challenge: When a filter is applied, change the text of
+     * the button to say "Back to luxury vans" (e.g.) instead of
+     * "Back to all vans".
+     * 
+     * As usual, there's more than one way to solve this, so just
+     * give it your best shot
+     */
