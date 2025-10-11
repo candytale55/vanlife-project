@@ -16,7 +16,8 @@ export default function VanDetail() {
             .then(data => setVan(data.vans))
     }, [params.id])
 
-    const search = location.state?.search || ""
+    const search = location.state?.search || "";
+    const type = location.state?.type || "all";
 
     return (
         <div className="van-detail-container">
@@ -24,7 +25,7 @@ export default function VanDetail() {
                 to={`..${search}`}
                 relative="path"
                 className="back-button"
-            >&larr; <span>Back to {location.state ? `${location.state.type} vans` : "all vans"}</span></Link>
+            >&larr; <span>Back to { type }</span></Link>
 
             {van ? (
                 <div className="van-detail">
