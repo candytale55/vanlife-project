@@ -625,3 +625,312 @@ state: {search: 'type=luxury'}, == Object that has a search property.
      * that case.)
      */
 
+
+This is the final solution accepted by Scrimba:
+
+```jsx
+export default function VanDetail() {
+    const params = useParams()
+    const location = useLocation()
+    console.log(location)
+    
+    const [van, setVan] = React.useState(null)
+
+    React.useEffect(() => {
+        fetch(`/api/vans/${params.id}`)
+            .then(res => res.json())
+            .then(data => setVan(data.vans))
+    }, [params.id])
+
+    /**
+     * Challenge: modify the Link `to` prop below to send the user
+     * back to the previous page with the searchParams included, if
+     * they exist. (Remember we may not have anything in that state
+     * if there were no filters applied before coming to this
+     * van detail page, so make sure to "code defensively" to handle
+     * that case.)
+     */
+    
+    const search = location.state?.search || "";
+    
+    return (
+        <div className="van-detail-container">
+            <Link
+                to={ `..${search}`}
+                relative="path"
+                className="back-button"
+            >&larr; <span>Back to all vans</span></Link>
+            
+            {van ? (
+                <div className="van-detail">
+                    <img src={van.imageUrl} />
+                    <i className={`van-type ${van.type} selected`}>
+                        {van.type}
+                    </i>
+                    <h2>{van.name}</h2>
+                    <p className="van-price"><span>${van.price}</span>/day</p>
+                    <p>{van.description}</p>
+                    <button className="link-button">Rent this van</button>
+                </div>
+            ) : <h2>Loading...</h2>}
+        </div>
+    )
+}
+```
+
+
+🔥 **Alright — let’s roast this like a senior dev reviewing a junior’s PR (with love).**
+You’re clearly on the right track, but let’s dissect it line by line and talk *real-world React* reasoning — not tutorial-level fluff.
+
+---
+
+## 🧠 First Impressions
+
+Your component *works*, but it has:
+
+* Some **potential bugs** and **fragile assumptions**
+* A few **React anti-patterns**
+* Some **missed best practices** that’ll bite you when scaling (e.g., data fetching, state management, and rendering safety)
+
+Let’s break it down section by section 👇
+
+---
+
+## ⚙️ 1. The Imports (missing and unclear)
+
+You’re using `useParams`, `useLocation`, and `Link`, but didn’t show the imports.
+Make sure to import explicitly — otherwise your linter will roast you before I do.
+
+```jsx
+import React from "react"
+import { useParams, useLocation, Link } from "react-router-dom"
+```
+
+**Best practice:**
+Always keep imports **ordered** (React, external libs, internal components, styles).
+Helps with readability and avoids “mystery variables” for reviewers.
+
+---
+
+## 🧩 2. The `useParams` and `useLocation` usage
+
+```js
+const params = useParams()
+const location = useLocation()
+```
+
+✅ **Good:** Clean, direct use.
+⚠️ **But:** You’re relying on `params.id` being stable and valid.
+In React Router, `params` can be empty initially on some transitions — so your `useEffect` might trigger a fetch with `undefined`.
+
+**Better:**
+
+```js
+const { id } = useParams();
+if (!id) return <h2>Invalid van ID</h2>;
+```
+
+---
+
+## 🔄 3. The Data Fetching
+
+```js
+React.useEffect(() => {
+  fetch(`/api/vans/${params.id}`)
+    .then(res => res.json())
+    .then(data => setVan(data.vans))
+}, [params.id])
+```
+
+**Roast time:**
+
+* You’re not handling **errors** or **loading states** properly.
+* `data.vans` smells wrong — likely should be `data.van` (singular).
+  If it’s plural, that’s confusing naming and bad API design.
+* Fetch inside a `useEffect` like this is okay for small demos but **not production-grade**.
+
+**Better pattern (modern React 18 way):**
+
+```js
+React.useEffect(() => {
+  let ignore = false;
+  async function loadVan() {
+    try {
+      const res = await fetch(`/api/vans/${id}`);
+      if (!res.ok) throw new Error("Failed to fetch van");
+      const data = await res.json();
+      if (!ignore) setVan(data.van);
+    } catch (err) {
+      console.error(err);
+    }
+  }
+  loadVan();
+  return () => (ignore = true);
+}, [id]);
+```
+
+✅ Avoids race conditions if the component unmounts mid-fetch.
+✅ Uses `async/await` for clarity.
+✅ Handles fetch failures gracefully.
+
+---
+
+## 🧭 4. The Navigation (Link logic)
+
+```js
+const search = location.state?.search || "";
+<Link to={`..${search}`} relative="path" className="back-button">
+  &larr; <span>Back to all vans</span>
+</Link>
+```
+
+**This is solid defensive coding.**
+👏 Nice job on the `location.state?.search || ""`.
+
+**Minor improvement:**
+Instead of concatenating blindly, use a utility function to ensure the path is normalized.
+For example:
+
+```js
+const search = location.state?.search ?? "";
+const backLink = `..${search}`;
+```
+
+Or even cleaner:
+
+```js
+const backTo = location.state?.from || "..";
+<Link to={backTo} relative="path">...</Link>
+```
+
+That way, if your route structure changes later, it’s resilient.
+
+---
+
+## 🖼️ 5. Rendering and Conditional Logic
+
+```js
+{van ? (
+  <div className="van-detail">...</div>
+) : <h2>Loading...</h2>}
+```
+
+✅ **Good pattern** — simple conditional rendering.
+⚠️ **However:** You should render an empty state placeholder or spinner *while loading*, not a header text.
+Also, if `van` fails to load (e.g., network error), this will hang forever.
+
+**Better:**
+
+```js
+if (!van) return <p>Loading van details...</p>;
+```
+
+Or even better with 3-state control:
+
+```js
+const [status, setStatus] = React.useState("loading"); // "loading" | "success" | "error"
+```
+
+---
+
+## 💅 6. The JSX Content
+
+```jsx
+<img src={van.imageUrl} />
+<i className={`van-type ${van.type} selected`}>
+  {van.type}
+</i>
+```
+
+**Roasts:**
+
+* `<img>` needs `alt` text for accessibility.
+* The `<i>` tag is semantically wrong here — use `<span>` or `<div>` unless it’s an actual icon.
+* Hardcoding “selected” is a smell — that’s styling logic leaking into structure.
+
+**Better:**
+
+```jsx
+<img src={van.imageUrl} alt={van.name} />
+<span className={`van-type ${van.type}`}>
+  {van.type}
+</span>
+```
+
+---
+
+## 🧱 7. State Naming & Shape
+
+You’re calling it `van`, but setting it from `data.vans` (plural).
+That’s inconsistent and a subtle code smell.
+
+**Best practice:** Keep your variable names **singular/plural-consistent**:
+
+```js
+const [van, setVan] = React.useState(null);
+// ...
+setVan(data.van);
+```
+
+---
+
+## 💡 8. Bonus: Code Organization and Scalability
+
+For a small project, this is fine.
+But in a real app, you’d want to:
+
+* Move the data fetching logic to a **custom hook** (`useVan` or `useFetch`).
+* Add proper **loading/error boundaries**.
+* Use React Query or SWR for caching, retries, and data consistency.
+
+Example custom hook:
+
+```js
+function useVan(id) {
+  const [data, setData] = React.useState(null);
+  const [error, setError] = React.useState(null);
+
+  React.useEffect(() => {
+    let ignore = false;
+    async function fetchData() {
+      try {
+        const res = await fetch(`/api/vans/${id}`);
+        if (!res.ok) throw new Error("Fetch failed");
+        const json = await res.json();
+        if (!ignore) setData(json.van);
+      } catch (err) {
+        setError(err);
+      }
+    }
+    fetchData();
+    return () => (ignore = true);
+  }, [id]);
+
+  return { data, error };
+}
+```
+
+Then your component becomes:
+
+```js
+const { id } = useParams();
+const { data: van, error } = useVan(id);
+```
+
+---
+
+## 🧠 TL;DR — Roast Summary
+
+| Area        | Issue                          | Better Practice                    |
+| ----------- | ------------------------------ | ---------------------------------- |
+| Fetching    | No error handling or cleanup   | Use async/await and guard unmounts |
+| State       | Naming mismatch (`data.vans`)  | Keep naming consistent             |
+| Rendering   | No alt text, misuse of `<i>`   | Use semantic elements              |
+| Navigation  | Good defensive coding          | Prefer `location.state?.from`      |
+| Resilience  | Missing loading/error handling | Add 3-state management             |
+| Reusability | Inline fetch logic             | Extract to a custom hook           |
+
+---
+
+If you’d like, I can **rewrite your component in a “senior-level” idiomatic React 18 style** (with hooks, error handling, and clean JSX) so you can compare side-by-side.
+Would you like me to do that next?

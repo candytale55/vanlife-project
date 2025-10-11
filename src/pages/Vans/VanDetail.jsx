@@ -16,7 +16,7 @@ export default function VanDetail() {
             .then(data => setVan(data.vans))
     }, [params.id])
 
-    const search = location.state?.search || ""
+    const search = location.state?.search || "";
 
     // ===== RENDER COMPONENT =====
     return (
