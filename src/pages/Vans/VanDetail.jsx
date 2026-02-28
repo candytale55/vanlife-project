@@ -1,15 +1,16 @@
-// ===== IMPORTS =====
 import React from "react"
 import { Link, useParams, useLocation } from "react-router-dom"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
+
+// TODO: Implement a custom hook for fetching APIs with loading and error
 
 // ===== VAN DETAIL COMPONENT =====
 export default function VanDetail() {
     // ===== ROUTE PARAMS & STATE =====
     const params = useParams()
-/*     console.log("Params (van #): ", params); // TODO: Remove once testing is done. */
-    /* const location = useLocation()
-    const [van, setVan] = React.useState(null) */
+    /*     console.log("Params (van #): ", params); // TODO: Remove once testing is done. */
+    const [van, setVan] = useState(null);
+    /* const location = useLocation() */
 
     
     // Fetch individual van data based on ID from URL
@@ -21,10 +22,14 @@ export default function VanDetail() {
 
                 const cleanedData = await response.json();
 
-                console.log(cleanedData); // TODO: Remove once testing is done.
+                setVan(cleanedData);
+
+                console.log(van); // TODO: Remove once testing is done.
+
                 
             } catch (error) {
-                console.log(error.message); // TODO: Remove once testing is done.
+                console.log(error.message); // TODO: Remove once you implement the useFetch custom hook with loading and error
+
             }
         }
         fetchData();
