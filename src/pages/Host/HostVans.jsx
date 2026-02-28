@@ -4,12 +4,14 @@ import { Link } from "react-router-dom"
 export default function HostVans() {
     const [vans, setVans] = React.useState([])
 
+    // TODO: Create a Custom Hook for fetching data
     React.useEffect(() => {
         fetch("/api/host/vans")
             .then(res => res.json())
             .then(data => setVans(data.vans))
     }, [])
 
+    // TODO: Do something to manage the keys with a key package
     const hostVansEls = vans.map(van => (
         <Link
             to={van.id}
@@ -28,7 +30,8 @@ export default function HostVans() {
 
     return (
         <section>
-            <h1 className="host-vans-title">Your listed vans</h1>
+            <h2>I am HostVans.jsx</h2>
+            <h2 className="host-vans-title">Your listed vans</h2>
             <div className="host-vans-list">
                 {
                     vans.length > 0 ? (
