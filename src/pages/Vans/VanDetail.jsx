@@ -6,22 +6,23 @@ import { Link, useParams, useLocation } from "react-router-dom"
 export default function VanDetail() {
     // ===== ROUTE PARAMS & STATE =====
     const params = useParams()
-    const location = useLocation()    
-    const [van, setVan] = React.useState(null)
+    console.log("Params (van #): ", params); // TODO: Remove once testing is done.
+    /* const location = useLocation()    
+    const [van, setVan] = React.useState(null) */
 
     // Fetch individual van data based on ID from URL
-    React.useEffect(() => {
+    /* React.useEffect(() => {
         fetch(`/api/vans/${params.id}`)
             .then(res => res.json())
             .then(data => setVan(data.vans))
     }, [params.id])
-
-    const search = location.state?.search || "";
-    const type = location.state?.type || "all";
+ */
+    /* const search = location.state?.search || "";
+    const type = location.state?.type || "all"; */
 
     return (
         <div className="van-detail-container">
-            <Link
+            {/* <Link
                 to={`..${search}`}
                 relative="path"
                 className="back-button"
@@ -38,7 +39,8 @@ export default function VanDetail() {
                     <p>{van.description}</p>
                     <button className="link-button">Rent this van</button>
                 </div>
-            ) : <h2>Loading...</h2>}
+            ) : <h2>Loading...</h2>} */}
+            <h2>I am VanDetail</h2>
         </div>
     )
 }
