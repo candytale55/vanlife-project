@@ -1,4 +1,3 @@
-import React from "react"
 import { NavLink, Outlet } from "react-router-dom"
 
 export default function HostLayout() {
@@ -11,7 +10,6 @@ export default function HostLayout() {
 
     return (
         <>
-            <h2>I am HostLayout.jsx</h2>
             <nav className="host-nav">
                 <NavLink
                     to="."
@@ -43,7 +41,6 @@ export default function HostLayout() {
                 </NavLink>
 
             </nav>
-            
             <Outlet />
         </>
     )

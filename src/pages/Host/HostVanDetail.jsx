@@ -3,9 +3,7 @@ import { useEffect, useState } from "react"
 
 export default function HostVanDetail() {
     const { id } = useParams()
-    console.log("Params (id):", id); // TODO: Remove once testing is done
     const [currentVan, setCurrentVan] = useState(null)
-    console.log("currentVan: ", currentVan); //TODO: Remove once testing is done.
 
     // TODO: move into a css file
     const activeStyles = {
@@ -38,7 +36,6 @@ export default function HostVanDetail() {
 
     return (
         <section>
-            <h2>I am HostVanDetail</h2>
             <Link
                 to=".."
                 relative="path"

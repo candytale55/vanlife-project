@@ -33,7 +33,6 @@ export default function VanDetail() {
 
     return (
         <div className="van-detail-container">
-            <h2>I am VanDetail</h2>
             {van ? (
                 <div className="van-detail">
                     <img src={van.imageUrl} />

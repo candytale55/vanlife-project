@@ -1,11 +1,11 @@
-import React from "react"
+import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 
 export default function HostVans() {
-    const [vans, setVans] = React.useState([])
+    const [vans, setVans] = useState([])
 
     // TODO: Create a Custom Hook for fetching data
-    React.useEffect(() => {
+    useEffect(() => {
         fetch("/api/host/vans")
             .then(res => res.json())
             .then(data => setVans(data.vans))
@@ -30,7 +30,6 @@ export default function HostVans() {
 
     return (
         <section>
-            <h2>I am HostVans.jsx</h2>
             <h2 className="host-vans-title">Your listed vans</h2>
             <div className="host-vans-list">
                 {

@@ -1,4 +1,3 @@
-import React from "react"
 import { useOutletContext } from "react-router-dom"
 
 export default function HostVanInfo() {
@@ -6,7 +5,6 @@ export default function HostVanInfo() {
 
     return (
         <section className="host-van-detail-info">
-            <h3>I am HostVanInfo.jsx</h3>
             <h4>Name: <span>{currentVan.name}</span></h4>
             <h4>Category: <span>{currentVan.type}</span></h4>
             <h4>Description: <span>{currentVan.description}</span></h4>
