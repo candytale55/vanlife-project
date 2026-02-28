@@ -1,28 +1,52 @@
 import React from "react"
 import { useParams, Link, NavLink, Outlet } from "react-router-dom"
+import { useEffect, useState } from "react"
 
 export default function HostVanDetail() {
     const { id } = useParams()
-    const [currentVan, setCurrentVan] = React.useState(null)
+    console.log("Params (id):", id); // TODO: Remove once testing is done
+    const [currentVan, setCurrentVan] = useState(null)
+    console.log("currentVan: ", currentVan); //TODO: Remove once testing is done.
 
+    // TODO: move into a css file
     const activeStyles = {
         fontWeight: "bold",
         textDecoration: "underline",
         color: "#161616"
     }
 
-    React.useEffect(() => {
+    // TODO: Create a Custom Hook for al fetch
+
+    useEffect(() => {
+
+        async function fetchData() {
+            try {
+
+                const response = await fetch(`/api/host/vans/${id}`);
+                const cleanedData = await response.json();
+                console.log(cleanedData.vans);
+
+            } catch (error) {
+                console.log(error.message);
+                // TODO: Replace once the custom Hook is created
+            }    
+        }
+        
+        fetchData();
+     }, [id]);
+    /*  /* useEffect(() => {
         fetch(`/api/host/vans/${id}`)
             .then(res => res.json())
-            .then(data => setCurrentVan(data.vans))
-    }, [])
+            .then(data => setCurrentVan(data.vans)) 
+    }, []) */
 
-    if (!currentVan) {
+    /* if (!currentVan) {
         return <h1>Loading...</h1>
-    }
+    } */
     return (
         <section>
-            <Link
+            <h2>I am HostVanDetail</h2>
+            {/* <Link
                 to=".."
                 relative="path"
                 className="back-button"
@@ -64,7 +88,7 @@ export default function HostVanDetail() {
                     </NavLink>
                 </nav>
                 <Outlet context={{ currentVan, typeFilter }} />
-            </div>
+            </div> */}
         </section>
     )
 }
