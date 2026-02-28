@@ -1,16 +1,36 @@
 // ===== IMPORTS =====
 import React from "react"
 import { Link, useParams, useLocation } from "react-router-dom"
+import { useEffect } from "react"
 
 // ===== VAN DETAIL COMPONENT =====
 export default function VanDetail() {
     // ===== ROUTE PARAMS & STATE =====
     const params = useParams()
-    console.log("Params (van #): ", params); // TODO: Remove once testing is done.
-    /* const location = useLocation()    
+/*     console.log("Params (van #): ", params); // TODO: Remove once testing is done. */
+    /* const location = useLocation()
     const [van, setVan] = React.useState(null) */
 
+    
     // Fetch individual van data based on ID from URL
+
+    useEffect(() => {
+        async function fetchData() {
+            try {
+                const response = await fetch(`/api/vans/${params.id}`);
+
+                const cleanedData = await response.json();
+
+                console.log(cleanedData); // TODO: Remove once testing is done.
+                
+            } catch (error) {
+                console.log(error.message); // TODO: Remove once testing is done.
+            }
+        }
+        fetchData();
+    }, [params.id]);
+    
+    
     /* React.useEffect(() => {
         fetch(`/api/vans/${params.id}`)
             .then(res => res.json())
