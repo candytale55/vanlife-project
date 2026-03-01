@@ -32,15 +32,18 @@ export default function VanDetail() {
     }, [params.id]);
     
 
-    /* const search = location.state?.search || "";
-    const type = location.state?.type || "all"; */
+    // Backup in case location.state is empty // TODO: Check if this is actually needed
+    const search = location.state?.search || "";
+
+
 
     return (
         <div className="van-detail-container">
             
             {/* Get back to all vans (remember search history using state) */}
             <Link
-                to={`..${location.state.search}`}
+                to={`..${search} `}
+                /* to={`..${location.state.search}`} // TODO: before adding search variable on top. It seems to be working - More understanding is needed*/ 
                 relative="path"
                 className="back-button"
             >&larr; <span>Back to all vans</span></Link>
