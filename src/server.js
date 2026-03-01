@@ -29,7 +29,7 @@ createServer({
         })
 
         // Obtener todas las furgonetas de Host
-        this.get("/host/vans", (schema, request) => {
+        this.get("/host/vans", (schema) => {
             // Hard-code the hostId for now
             return schema.vans.where({ hostId: "123" })
         })
