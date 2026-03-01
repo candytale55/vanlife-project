@@ -4,21 +4,29 @@ import { getVans } from "../../api.js"
 
 export default function Vans() {
     const [searchParams, setSearchParams] = useSearchParams();
-    console.log("searchParams.toString():", searchParams.toString()); // TODO: Remove once testing is done
+/*     console.log("searchParams.toString():", searchParams.toString()); // TODO: Remove once testing is done */
     
     const typeFilter = searchParams.get("type")
     /*         console.log("Typefilter", typeFilter) //TODO: Remove once testing is done */
     
     const [ vans, setVans ] = useState([])
     const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(null);
 
     // TODO: Move to a custom Hook
     useEffect(() => {
         async function loadVans() {
             setLoading(true);
-            const data = await getVans();
-            setVans(data);
-            setLoading(false);
+            try {
+                const data = await getVans();
+                setVans(data);
+            } catch (error) {
+                console.log("There was an error!:");
+                console.log(error);
+                setError(error)
+            } finally {
+                setLoading(false);
+            }
         }
         loadVans();
         }, [])
@@ -62,7 +70,11 @@ export default function Vans() {
     }
 
     if (loading) {
-        return <h2>Loading...</h2>
+        return <h2 aria-live="polite">Loading...</h2>
+    }
+
+    if (error) {
+        return <h1 aria-live="assertive">There was an error: {error.message}</h1>
     }
 
     // ===== RENDER COMPONENT =====
