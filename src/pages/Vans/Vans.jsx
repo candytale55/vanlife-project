@@ -1,5 +1,6 @@
 import { Link, useSearchParams } from "react-router-dom"
 import { useEffect, useState } from "react"
+import { getVans } from "../../api.js"
 
 export default function Vans() {
     const [searchParams, setSearchParams] = useSearchParams();
@@ -12,9 +13,11 @@ export default function Vans() {
 
     // TODO: Move to a custom Hook
     useEffect(() => {
-            fetch("/api/vans")
-                .then(res => res.json())
-                .then(data => setVans(data.vans))
+        async function loadVans() {
+            const data = await getVans();
+            setVans(data);
+        }
+        loadVans();
         }, [])
 
     // Get vans that match the type filter
@@ -31,11 +34,6 @@ export default function Vans() {
                     search: `?${searchParams.toString()}`,
                     type: typeFilter
                 }}
-                /* // TODO: Delete or uncomment once it is working again                 
-                state={{
-                    search: `?${searchParams.toString()}`,
-                    type: typeFilter
-                }} */
             >
                 <img src={van.imageUrl} />
                 <div className="van-info">
