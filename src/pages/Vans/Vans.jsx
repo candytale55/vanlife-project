@@ -1,5 +1,6 @@
 import { Link, useSearchParams } from "react-router-dom"
 import { useEffect, useState } from "react"
+import { getVans } from "../../api.js"
 
 export default function Vans() {
     const [searchParams, setSearchParams] = useSearchParams();
@@ -8,13 +9,18 @@ export default function Vans() {
     const typeFilter = searchParams.get("type")
     /*         console.log("Typefilter", typeFilter) //TODO: Remove once testing is done */
     
-    const [vans, setVans] = useState([])
+    const [ vans, setVans ] = useState([])
+    const [loading, setLoading] = useState(false);
 
     // TODO: Move to a custom Hook
     useEffect(() => {
-            fetch("/api/vans")
-                .then(res => res.json())
-                .then(data => setVans(data.vans))
+        async function loadVans() {
+            setLoading(true);
+            const data = await getVans();
+            setVans(data);
+            setLoading(false);
+        }
+        loadVans();
         }, [])
 
     // Get vans that match the type filter
@@ -31,11 +37,6 @@ export default function Vans() {
                     search: `?${searchParams.toString()}`,
                     type: typeFilter
                 }}
-                /* // TODO: Delete or uncomment once it is working again                 
-                state={{
-                    search: `?${searchParams.toString()}`,
-                    type: typeFilter
-                }} */
             >
                 <img src={van.imageUrl} />
                 <div className="van-info">
@@ -58,6 +59,10 @@ export default function Vans() {
             }
             return prevParams
         })
+    }
+
+    if (loading) {
+        return <h2>Loading...</h2>
     }
 
     // ===== RENDER COMPONENT =====

@@ -1,15 +1,30 @@
 import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
+import { getHostVans } from "../../api.js"
 
 export default function HostVans() {
     const [vans, setVans] = useState([])
+    const [loading, setLoading] = useState(false);
 
     // TODO: Create a Custom Hook for fetching data
-    useEffect(() => {
+    /* useEffect(() => {
         fetch("/api/host/vans")
             .then(res => res.json())
             .then(data => setVans(data.vans))
     }, [])
+ */
+
+    useEffect(() => {
+        async function loadVans() {
+            setLoading(true);
+            const data = await getHostVans();
+            setVans(data);
+            setLoading(false);
+        }
+        loadVans();
+    }, [])
+
+    
 
     // TODO: Do something to manage the keys with a key package
     const hostVansEls = vans.map(van => (
@@ -28,20 +43,18 @@ export default function HostVans() {
         </Link>
     ))
 
+    if (loading) {
+        return <h2>Loading...</h2>
+    }
+
     return (
         <section>
             <h2 className="host-vans-title">Your listed vans</h2>
             <div className="host-vans-list">
-                {
-                    vans.length > 0 ? (
-                        <section>
-                            {hostVansEls}
-                        </section>
-
-                    ) : (
-                        <h2>Loading...</h2>
-                    )
-                }
+                <section>
+                    {hostVansEls}
+                </section>
+                {/* //TODO: Fix the semantic tags WTF! */}
             </div>
         </section>
     )
