@@ -36,6 +36,7 @@ export default function HostVanDetail() {
 
     return (
         <section>
+            {/* Get back to all vans (clean search history) */}
             <Link
                 to=".."
                 relative="path"
