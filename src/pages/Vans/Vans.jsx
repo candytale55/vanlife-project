@@ -1,25 +1,19 @@
-import React from "react"
 import { Link, useSearchParams } from "react-router-dom"
+import { useEffect, useState } from "react"
 
-
-// ===== VANS LISTING COMPONENT =====
 export default function Vans() {
-
-
-        // Search params for filtering Vans by type
         const [searchParams, setSearchParams] = useSearchParams()
-    
-    
-        const [vans, setVans] = React.useState([])
-
         const typeFilter = searchParams.get("type")
+        console.log("Typefilter", typeFilter) //TODO: Remove once testing is done
+        const [vans, setVans] = useState([])
 
-        React.useEffect(() => {
+        useEffect(() => {
             fetch("/api/vans")
                 .then(res => res.json())
                 .then(data => setVans(data.vans))
         }, [])
 
+        // Get vans that match the type filter
         const displayedVans = typeFilter
             ? vans.filter(van => van.type === typeFilter)
             : vans
