@@ -27,7 +27,10 @@ export default function Vans() {
         <div key={van.id} className="van-tile">
             <Link
                 to={van.id}
-                state = {{ search: `?${searchParams.toString()}`}}
+                state={{
+                    search: `?${searchParams.toString()}`,
+                    type: typeFilter
+                }}
                 /* // TODO: Delete or uncomment once it is working again                 
                 state={{
                     search: `?${searchParams.toString()}`,

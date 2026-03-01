@@ -35,6 +35,8 @@ export default function VanDetail() {
     // Backup in case location.state is empty // TODO: Check if this is actually needed
     const search = location.state?.search || "";
 
+    // To display the name of the type you are returning to
+    const type = location.state.type ? location.state.type : "all";
 
 
     return (
@@ -46,7 +48,7 @@ export default function VanDetail() {
                 /* to={`..${location.state.search}`} // TODO: before adding search variable on top. It seems to be working - More understanding is needed*/ 
                 relative="path"
                 className="back-button"
-            >&larr; <span>Back to all vans</span></Link>
+            >&larr; <span>Back to { type } vans</span></Link>
 
             {van ? (
                 <div className="van-detail">
@@ -58,15 +60,6 @@ export default function VanDetail() {
                     <button className="link-button">Rent this van</button>
                 </div>
             ) : <h2>Loading...</h2>}
-            
-            {/* <Link
-                to={`..${search}`}
-                relative="path"
-                className="back-button"
-            >&larr; <span>Back to { type }</span></Link>
-
-            */}
-            
         </div>
     )
 }
