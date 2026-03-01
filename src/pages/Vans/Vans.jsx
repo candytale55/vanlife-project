@@ -9,13 +9,16 @@ export default function Vans() {
     const typeFilter = searchParams.get("type")
     /*         console.log("Typefilter", typeFilter) //TODO: Remove once testing is done */
     
-    const [vans, setVans] = useState([])
+    const [ vans, setVans ] = useState([])
+    const [loading, setLoading] = useState(false);
 
     // TODO: Move to a custom Hook
     useEffect(() => {
         async function loadVans() {
+            setLoading(true);
             const data = await getVans();
             setVans(data);
+            setLoading(false);
         }
         loadVans();
         }, [])
@@ -56,6 +59,10 @@ export default function Vans() {
             }
             return prevParams
         })
+    }
+
+    if (loading) {
+        return <h2>Loading...</h2>
     }
 
     // ===== RENDER COMPONENT =====
