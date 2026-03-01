@@ -1,12 +1,16 @@
-import { Link, useParams, } from "react-router-dom"
+import { Link, useParams, useLocation } from "react-router-dom"
 import { useEffect, useState } from "react"
 
 
 export default function VanDetail() {
 
     const params = useParams()
+
+    const location = useLocation();
+    console.log("location:", location); // TODO: Remove once tests are done
+
     const [van, setVan] = useState(null);
-    console.log("Van#: ", van); // TODO: Remove once tests are done. 
+    /* console.log("Van#: ", van); // TODO: Remove once tests are done.  */
     
     // Fetch individual van data based on ID from URL
     //TODO: Implement a useFetch custom Hook for this
@@ -34,9 +38,9 @@ export default function VanDetail() {
     return (
         <div className="van-detail-container">
             
-            {/* Get back to all vans (clean search history) */}
+            {/* Get back to all vans (remember search history using state) */}
             <Link
-                to=".."
+                to={`..${location.state.search}`}
                 relative="path"
                 className="back-button"
             >&larr; <span>Back to all vans</span></Link>

@@ -2,31 +2,37 @@ import { Link, useSearchParams } from "react-router-dom"
 import { useEffect, useState } from "react"
 
 export default function Vans() {
-        const [searchParams, setSearchParams] = useSearchParams()
-        const typeFilter = searchParams.get("type")
-        console.log("Typefilter", typeFilter) //TODO: Remove once testing is done
-        const [vans, setVans] = useState([])
+    const [searchParams, setSearchParams] = useSearchParams();
+    console.log("searchParams.toString():", searchParams.toString()); // TODO: Remove once testing is done
+    
+    const typeFilter = searchParams.get("type")
+    /*         console.log("Typefilter", typeFilter) //TODO: Remove once testing is done */
+    
+    const [vans, setVans] = useState([])
 
-        useEffect(() => {
+    // TODO: Move to a custom Hook
+    useEffect(() => {
             fetch("/api/vans")
                 .then(res => res.json())
                 .then(data => setVans(data.vans))
         }, [])
 
-        // Get vans that match the type filter
-        const displayedVans = typeFilter
-            ? vans.filter(van => van.type === typeFilter)
-            : vans
+    // Get vans that match the type filter
+    const displayedVans = typeFilter
+        ? vans.filter(van => van.type === typeFilter)
+        : vans
         
     // ===== RENDER VAN TILES =====
     const vanElements = displayedVans.map(van => (
         <div key={van.id} className="van-tile">
             <Link
                 to={van.id}
+                state = {{ search: `?${searchParams.toString()}`}}
+                /* // TODO: Delete or uncomment once it is working again                 
                 state={{
                     search: `?${searchParams.toString()}`,
                     type: typeFilter
-                }}
+                }} */
             >
                 <img src={van.imageUrl} />
                 <div className="van-info">
@@ -56,6 +62,8 @@ export default function Vans() {
     return (
         <div className="van-list-container">
             <h1>Explore our van options</h1>
+
+            {/* Type Filter Buttons */}
             <div className="van-list-filter-buttons">
                 <button
                     onClick={() => handleFilterChange("type", "simple")}
