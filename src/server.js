@@ -18,15 +18,15 @@ createServer({
         this.namespace = "api"
 
         // Simula un error en la llamada a la API para probar el manejo de errores en el frontend
-        this.get("/vans", (schema, request) => {
+/*         this.get("/vans", (schema, request) => {
             return new Response(400, {}, { error: "Error fetching data" })
-        })
+        }) */
 
         //  Obtener todas las furgonetas (vans)
-        /* this.get("/vans", (schema) => {
+        this.get("/vans", (schema) => {
             return schema.vans.all()  // miragejs pluraliza van
         })
- */
+
         // Obtener una furgoneta por ID
         this.get("/vans/:id", (schema, request) => {
             const id = request.params.id
